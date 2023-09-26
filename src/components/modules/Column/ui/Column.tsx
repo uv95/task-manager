@@ -1,16 +1,17 @@
-import { ReactNode } from 'react';
+import { forwardRef, HtmlHTMLAttributes, ReactNode, Ref } from 'react';
 import './Column.scss';
     
-interface ColumnProps {
+interface ColumnProps extends HtmlHTMLAttributes<HTMLDivElement> {
     title: string
     children: ReactNode
+    isDraggingOver: boolean
 }
     
-export const Column = ({ title, children }: ColumnProps) => {
+export const Column = forwardRef<HTMLDivElement, ColumnProps>(function Column({ title, children, isDraggingOver }, ref) {
     return (
-        <div className='column'>
+        <div ref={ref} className={`column ${isDraggingOver ? 'column-hovered' : ''}`}>
             <h1>{title}</h1>
             {children}
         </div>
     );
-};
+});

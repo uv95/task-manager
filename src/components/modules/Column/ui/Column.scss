@@ -1,9 +1,13 @@
 .column {
     width: 50rem;
     height: 100rem;
-    background-color: rgba(245, 255, 159, 0.537);
+    background-color: rgba(245, 255, 159, 0.303);
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 2rem;
+
+    &-hovered {
+        background-color: rgb(255, 168, 168);
+    }
 }
