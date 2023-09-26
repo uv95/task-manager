@@ -1,0 +1,22 @@
+{
+	"Create React/CSS Component": {
+	  "prefix": "cr",
+	  "body": [
+		"import './${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}.module.scss';",
+		"\t",
+		"interface ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Props {",
+		"}",
+		"\t",
+		"export const ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/} = ({ }: ${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}Props) => {",
+
+		"return (",
+		" <div className='${TM_FILENAME_BASE/(.*)/${1:/capitalize}/}'>",
+		"\t$0",
+		"/",
+		" </div>",
+		");",
+		"};"
+	  ],
+	  "description": "Create a React Component with typescript"
+	}
+  }

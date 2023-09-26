@@ -1,0 +1,28 @@
+.button {
+    border: 0;
+    background-color: inherit;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0 2.5rem;
+    border-radius: 1rem;
+    transition: all 0.1s;
+    height: 4rem;
+  
+    &:hover{
+      opacity: 0.8;
+    }
+  
+    &:active{
+      color: inherit;
+    }
+
+    &-primary {
+        background-color: rgb(152, 152, 255);
+      }
+    &-outline {
+        border: 1px solid black;
+      }
+    &-clear {
+        padding: 0;
+      }
+}

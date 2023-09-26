@@ -1,0 +1,22 @@
+.select {
+    width: 15rem;
+    border: 1px solid black;
+    position: relative;
+}
+
+.defaultOption {
+    cursor: pointer;
+ 
+}
+
+.options {
+    width: 100%;
+    position: absolute;
+    background-color: #fff;
+    z-index: 2;
+}
+
+.option {
+    cursor: pointer;
+    border: 1px solid black;
+}
