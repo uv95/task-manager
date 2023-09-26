@@ -7,9 +7,10 @@ import './Task.scss';
     
 interface TaskProps {
     task: ITask
+    projectId: string
 }
     
-export const Task = ({ task}: TaskProps) => {
+export const Task = ({ task, projectId}: TaskProps) => {
     const [openModal, setOpenModal] = useState(false)
 
     return (
@@ -20,7 +21,7 @@ export const Task = ({ task}: TaskProps) => {
             </Card>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>
-                <TaskInfo task={task}/>
+                <TaskInfo task={task} projectId={projectId}/>
             </Modal>}
         </>
     );

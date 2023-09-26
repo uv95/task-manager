@@ -4,16 +4,20 @@ import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { v4 as uuidv4 } from 'uuid'
 import './AddProject.scss';
 import { IProject } from '../../../../utils/data';
+import { useDispatch } from 'react-redux';
+import { addProject } from '../../../../store/projects/actions';
     
 interface AddProjectProps {
     onCancel: () => void
 }
     
 export const AddProject = ({ onCancel }: AddProjectProps) => {
-    const [formData, setFormData] = useState<IProject>({id: '', title: '', tasks: []})
+    const dispatch = useDispatch();
+    const [formData, setFormData] = useState<IProject>({id: '', title: 'New Project', tasks: []})
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()
+        dispatch(addProject(formData))
         console.log('project added')
         onCancel()
     }

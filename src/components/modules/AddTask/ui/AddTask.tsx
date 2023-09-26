@@ -5,12 +5,17 @@ import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { v4 as uuidv4 } from 'uuid'
 import './AddTask.scss';
 import { Select } from '../../Select';
+import { useDispatch } from 'react-redux';
+import { addTask } from '../../../../store/tasks/actions';
+import { addTaskId } from '../../../../store/projects/actions';
     
 interface AddTaskProps {
     onCancel: () => void
+    projectId: string
 }
     
-export const AddTask = ({onCancel }: AddTaskProps) => {
+export const AddTask = ({onCancel, projectId }: AddTaskProps) => {
+    const dispatch = useDispatch();
     const [formData, setFormData] = useState<ITask>({
         id: '',
         title: 'New Task',
@@ -23,6 +28,8 @@ export const AddTask = ({onCancel }: AddTaskProps) => {
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()
+        dispatch(addTask(formData))
+        dispatch(addTaskId({taskId: formData.id, projectId}))
         console.log('project added')
         onCancel()
     }
