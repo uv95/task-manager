@@ -13,7 +13,7 @@ interface AddProjectProps {
     
 export const AddProject = ({ onCancel }: AddProjectProps) => {
     const dispatch = useDispatch();
-    const [formData, setFormData] = useState<IProject>({id: '', title: 'New Project', tasks: []})
+    const [formData, setFormData] = useState<IProject>({id: '', title: '', tasks: []})
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()

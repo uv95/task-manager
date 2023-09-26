@@ -1,5 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
-import { ITask, Priority, Status } from '../../../../utils/data';
+import { ISubtask, ITask, Priority, Status } from '../../../../utils/data';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { v4 as uuidv4 } from 'uuid'
@@ -8,6 +8,7 @@ import { Select } from '../../Select';
 import { useDispatch } from 'react-redux';
 import { addTask } from '../../../../store/tasks/actions';
 import { addTaskId } from '../../../../store/projects/actions';
+import { AddSubtasks } from '../../AddSubtasks';
     
 interface AddTaskProps {
     onCancel: () => void
@@ -16,6 +17,7 @@ interface AddTaskProps {
     
 export const AddTask = ({onCancel, projectId }: AddTaskProps) => {
     const dispatch = useDispatch();
+    const [subtasks, setSubtasks] = useState<ISubtask[]>([])
     const [formData, setFormData] = useState<ITask>({
         id: '',
         title: 'New Task',
@@ -24,13 +26,13 @@ export const AddTask = ({onCancel, projectId }: AddTaskProps) => {
         timeInProgress: 'Created now',
         priority: Priority.MEDIUM,
         status: Status.QUEUE,
+        subtasks
     })
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()
         dispatch(addTask(formData))
         dispatch(addTaskId({taskId: formData.id, projectId}))
-        console.log('project added')
         onCancel()
     }
 
@@ -38,9 +40,11 @@ export const AddTask = ({onCancel, projectId }: AddTaskProps) => {
         setFormData({
             ...formData,
             id: uuidv4(),
+            subtasks,
             [e.target.id]: e.target.value
         })
     }
+
     return (
         <div className='addTask'>
             <h2>New Task</h2>
@@ -65,6 +69,8 @@ export const AddTask = ({onCancel, projectId }: AddTaskProps) => {
                         priority: option as Priority
                     }))}/>
                 </div>
+
+                <AddSubtasks setSubtasks={setSubtasks} subtasks={subtasks}/>
 
                 <div className="buttons">
                     <Button theme={ButtonTheme.OUTLINE} onClick={onCancel}>Cancel</Button>

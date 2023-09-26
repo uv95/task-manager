@@ -1,10 +1,10 @@
 import { ITask } from '../../utils/data'
 
 export enum TasksActions {
-    ADD_TASK = '@@TASK/ADD_TASK',
-    UPDATE_TASK = '@@TASK/UPDATE_TASK',
-    DELETE_TASK = '@@TASK/DELETE_TASK',
-    DELETE_ALL_PROJECT_TASKS = '@@TASK/DELETE_ALL_PROJECT_TASKS '
+    ADD_TASK = '@@task/ADD_TASK',
+    UPDATE_TASK = '@@task/UPDATE_TASK',
+    DELETE_TASK = '@@task/DELETE_TASK',
+    DELETE_ALL_PROJECT_TASKS = '@@task/DELETE_ALL_PROJECT_TASKS '
 }
 
 export const addTask = (task:ITask) => ({

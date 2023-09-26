@@ -4,6 +4,7 @@ import { deleteTask } from '../../../../store/tasks/actions';
 import { ITask } from '../../../../utils/data';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
+import { SubtasksList } from '../../SubtasksList';
 import './TaskInfo.scss';
     
 interface TaskInfoProps {
@@ -18,9 +19,11 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
         dispatch(deleteTask(task.id))
         dispatch(deleteTaskId({taskId: task.id, projectId}))
     }
+    
     return (
-        <div className='TaskInfo'>
+        <div className='taskInfo'>
             task info {task.title}
+            <SubtasksList subtasks={task.subtasks}/>
             <Button theme={ButtonTheme.OUTLINE} onClick={onDelete}>
                 Delete
             </Button>

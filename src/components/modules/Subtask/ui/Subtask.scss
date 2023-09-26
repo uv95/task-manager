@@ -1,0 +1,16 @@
+.subtask {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.input {
+    &-disabled{
+        background-color: inherit;
+        border: none;
+        pointer-events: none;
+        &:focus{
+        outline: none;
+        }
+    }
+}
