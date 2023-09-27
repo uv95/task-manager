@@ -1,0 +1,13 @@
+.projectsContainer {
+    & .button {
+        display: block;
+        margin-left: auto;
+        margin-bottom: 2rem;
+    }
+}
+
+.projects {
+    display: flex;
+    gap: 4rem;
+    flex-wrap: wrap;
+}

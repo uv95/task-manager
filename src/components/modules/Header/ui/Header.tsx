@@ -8,7 +8,9 @@ interface HeaderProps {
 export const Header = ({ children}: HeaderProps) => {
     return (
         <header className='header'>
-            {children}
+            <div className="headerContaner">
+                {children}
+            </div>
         </header>
     );
 };

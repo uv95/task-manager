@@ -7,28 +7,27 @@ import { AddProject } from '../../../components/modules/AddProject';
 import { Header } from '../../../components/modules/Header';
 import { Modal } from '../../../components/modules/Modal';
 import { Project } from '../../../components/modules/Project';
-import { selectProjects } from '../../../store/projects/selector';
+import { selectProjects, selectProjectsLength } from '../../../store/projects/selector';
 import { IProject } from '../../../utils/data';
 import './Projects.scss';
-    
-interface ProjectsProps {
-}
-    
+        
 export const Projects = () => {
     const [openModal, setOpenModal] = useState(false)
     const projects = useSelector(selectProjects)
-    console.log(projects)
+    const projectsLength = useSelector(selectProjectsLength)
+
     return (
         <>
             <Header><h1>Projects</h1></Header>
-            <main>
+            <main className='projectsContainer'>
                 <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                     ➕ Add Project
                 </Button>
-                <div className='Projects'>
-                    {Object.values(projects).map((project: IProject) => (
-                        <Project key={project.id} title={project.title} id={project.id}/>
-                    ))}
+                <div className='projects'>
+                    {projectsLength === 0 ? <p>No projects yet.</p> :    
+                        Object.values(projects).map((project: IProject) => (
+                            <Project key={project.id} project={project} id={project.id}/>
+                        ))}
                 </div>
             </main>
 
