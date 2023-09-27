@@ -1,0 +1,54 @@
+@import '../../../../index.scss';
+
+.tag {
+    width: fit-content;
+
+    &-size_l {
+        padding: 0.3rem 1.8rem;
+        border-radius: 5rem;
+        font-weight: bold;
+    }
+
+    &-size_s {
+        padding: 0.3rem 1rem;
+        border-radius: 1rem;
+        font-size: 1.2rem;
+    }
+
+    &-status {
+    
+        &--Queue {
+            color: $color-queue;
+            background-color: $color-queue--light;
+        }
+    
+        &--Development {
+            color: $color-development;
+            background-color: $color-development--light;
+        }
+    
+        &--Done {
+            color: $color-done;
+            background-color: $color-done--light;
+        }
+
+    }
+
+    &-priority {
+    
+        &--High {
+            color: $color-priority-high;
+            background-color: $color-priority-high--light;
+        }
+    
+        &--Medium {
+            color: $color-priority-medium;
+            background-color: $color-priority-medium--light;
+        }
+    
+        &--Low {
+            color: $color-priority-low;
+            background-color: $color-priority-low--light;
+        }
+    }
+}
