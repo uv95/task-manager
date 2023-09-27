@@ -3,7 +3,7 @@ import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { v4 as uuidv4 } from 'uuid'
 import './AddProject.scss';
-import { IProject } from '../../../../utils/data';
+import { IProject } from '../../../../utils/types';
 import { useDispatch } from 'react-redux';
 import { addProject } from '../../../../store/projects/actions';
     

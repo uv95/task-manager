@@ -1,4 +1,4 @@
-import { ITask, NormalizedData } from "../../utils/data";
+import { ITask, NormalizedData } from "../../utils/types";
 import { TasksActions } from "./actions";
 
 const initialState = {

@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { addTaskId } from '../../../../store/projects/actions';
 import { addTask, updateTask } from '../../../../store/tasks/actions';
-import { ITask, PriorityTypes, Status } from '../../../../utils/data';
+import { ITask, PriorityTypes, Status } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { Select } from '../../Select';

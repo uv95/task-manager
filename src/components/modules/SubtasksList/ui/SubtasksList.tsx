@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
-import { ISubtask } from '../../../../utils/data';
+import { ISubtask } from '../../../../utils/types';
 import { AddSubtasks } from '../../AddSubtasks';
 import { Subtask } from '../../Subtask/ui/Subtask';
 import './SubtasksList.scss';

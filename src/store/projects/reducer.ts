@@ -1,4 +1,4 @@
-import { IProject, NormalizedData } from "../../utils/data";
+import { IProject, NormalizedData } from "../../utils/types";
 import { ProjectsActions } from "./actions";
 
 const initialState = {

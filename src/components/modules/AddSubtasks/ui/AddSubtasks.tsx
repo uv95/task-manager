@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from 'react';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
-import { ISubtask } from '../../../../utils/data';
+import { ISubtask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import './AddSubtasks.scss';

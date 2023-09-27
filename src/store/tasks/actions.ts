@@ -1,4 +1,4 @@
-import { ITask } from '../../utils/data'
+import { ITask } from '../../utils/types'
 
 export enum TasksActions {
     ADD_TASK = '@@task/ADD_TASK',

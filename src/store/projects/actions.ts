@@ -1,4 +1,4 @@
-import { IProject } from '../../utils/data'
+import { IProject } from '../../utils/types'
 
 export enum ProjectsActions {
     ADD_PROJECT = '@@project/ADD_PROJECT',

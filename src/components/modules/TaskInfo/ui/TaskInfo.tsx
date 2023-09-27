@@ -5,7 +5,7 @@ import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { deleteTaskId } from '../../../../store/projects/actions';
 import { selectProjects } from '../../../../store/projects/selector';
 import { deleteTask } from '../../../../store/tasks/actions';
-import { IProject, ITask } from '../../../../utils/data';
+import { IProject, ITask } from '../../../../utils/types';
 import { formatDate } from '../../../../utils/formatDate';
 import { getTimeInProgress } from '../../../../utils/getTimeInProgress';
 import { Button } from '../../../elements/Button';

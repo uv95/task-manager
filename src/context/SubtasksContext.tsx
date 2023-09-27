@@ -1,5 +1,5 @@
 import React, { createContext, FC, PropsWithChildren, useContext, useMemo, useState } from 'react';
-import { ISubtask } from '../utils/data';
+import { ISubtask } from '../utils/types';
 
 interface ISubtasksContext {
   subtasks: ISubtask[] | [];

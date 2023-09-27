@@ -1,5 +1,5 @@
 import { ChangeEvent, useState } from 'react';
-import { ISubtask } from '../../../../utils/data';
+import { ISubtask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import './Subtask.scss';

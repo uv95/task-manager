@@ -1,6 +1,6 @@
 import { forwardRef, HtmlHTMLAttributes, useState } from 'react';
 import { DraggableProvided } from 'react-beautiful-dnd';
-import { ITask } from '../../../../utils/data';
+import { ITask } from '../../../../utils/types';
 import { Card } from '../../../elements/Card';
 import { Tag } from '../../../elements/Tag';
 import { TagSize, TagTheme } from '../../../elements/Tag/ui/Tag';

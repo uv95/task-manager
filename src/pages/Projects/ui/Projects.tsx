@@ -8,7 +8,7 @@ import { Header } from '../../../components/modules/Header';
 import { Modal } from '../../../components/modules/Modal';
 import { Project } from '../../../components/modules/Project';
 import { selectProjects, selectProjectsLength } from '../../../store/projects/selector';
-import { IProject } from '../../../utils/data';
+import { IProject } from '../../../utils/types';
 import './Projects.scss';
         
 export const Projects = () => {

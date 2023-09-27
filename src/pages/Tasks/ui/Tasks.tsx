@@ -12,7 +12,7 @@ import { Task } from '../../../components/modules/Task';
 import { selectProjects } from '../../../store/projects/selector';
 import { updateTask } from '../../../store/tasks/actions';
 import { selectAllTasks } from '../../../store/tasks/selector';
-import { IProject, ITask, Status } from '../../../utils/data';
+import { IProject, ITask, Status } from '../../../utils/types';
 import './Tasks.scss';
     
 interface TasksProps {
