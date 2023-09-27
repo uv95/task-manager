@@ -9,9 +9,11 @@ interface ColumnProps extends HtmlHTMLAttributes<HTMLDivElement> {
     
 export const Column = forwardRef<HTMLDivElement, ColumnProps>(function Column({ title, children, isDraggingOver }, ref) {
     return (
-        <div ref={ref} className={`column ${isDraggingOver ? 'column-hovered' : ''}`}>
-            <h1>{title}</h1>
-            {children}
+        <div className='column'>
+            <h1 className='title'>{title}</h1>
+            <div ref={ref} className={`tasksContainer ${isDraggingOver ? 'tasksContainer-hovered' : ''}`}>
+                {children}
+            </div>
         </div>
     );
 });
