@@ -8,14 +8,14 @@ export interface ITask {
     id: string,
     title: string,
     description: string,
-    createdAt: Date,
-    timeInProgress: string,
-    completedAt?: Date,
-    priority: Priority,
+    starts: string,
+    timeInDevelopment: string,
+    ends: string,
+    priority: PriorityTypes,
     files?: string,
     status: Status,
     subtasks: ISubtask[],
-    comments?: string[],
+    comments: string[],
 }
 
 export interface ISubtask {
@@ -36,7 +36,7 @@ export enum Status {
   DONE = 'Done',
 }
 
-export enum Priority {
+export enum PriorityTypes {
    HIGH = 'High',
    MEDIUM = 'Medium',
    LOW = 'Low',

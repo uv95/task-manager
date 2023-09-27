@@ -8,9 +8,10 @@ interface SubtaskProps {
    subtask: ISubtask
    toggleIsDone: () => void
    editText: (newText: string) => void
+   cantEdit?: boolean
 }
     
-export const Subtask = ({ subtask, toggleIsDone, editText }: SubtaskProps) => {
+export const Subtask = ({ subtask, toggleIsDone, editText, cantEdit }: SubtaskProps) => {
     const [isDisabled, setIsDisabled] = useState(true)
     const [text, setText] = useState(subtask.text)
 
@@ -19,19 +20,15 @@ export const Subtask = ({ subtask, toggleIsDone, editText }: SubtaskProps) => {
     }
 
     const onClick = () => {
-        if(isDisabled) {
-            setIsDisabled(false)
-        } else {
-            editText(text)
-            setIsDisabled(true)
-        }
+        !isDisabled && editText(text)
+        setIsDisabled(false)
     }
 
     return (
         <div className='subtask'>
             <div onClick={toggleIsDone}>{subtask.isDone ? '✅' : '☑️'}</div>
             <input className={`${isDisabled ? 'input-disabled' : 'input'}`} type="text" disabled={isDisabled} value={text} onChange={onChange}/>
-            <Button theme={ButtonTheme.CLEAR} onClick={onClick}>{isDisabled ? '✏️' : '✔'}</Button>
+            {!cantEdit && <Button theme={ButtonTheme.CLEAR} onClick={onClick}>{isDisabled ? '✏️' : '✔'}</Button>}
         </div>
     );
 };

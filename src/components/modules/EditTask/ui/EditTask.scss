@@ -1,0 +1,40 @@
+.editTask {
+    width: 100%;
+    & h2{
+        margin-bottom: 2rem;
+    }
+
+    & form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    & .buttons {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-left: auto;
+    }
+}
+
+
+.input {
+    &-title {
+        font-weight: bold;
+        font-size: 3rem;
+    }
+    &-description {
+        padding: 0.5rem 1rem;
+        width: 100%;
+        height: 12rem;
+        font-size: inherit;
+    }
+}
+
+.selects {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+

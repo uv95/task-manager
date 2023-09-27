@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { HtmlHTMLAttributes, useState } from 'react';
 import './Select.scss';
     
-interface SelectProps {
+interface SelectProps extends HtmlHTMLAttributes<HTMLDivElement> {
     options: string[]
     defaultOption: string
     setSelected: (option: string) => void

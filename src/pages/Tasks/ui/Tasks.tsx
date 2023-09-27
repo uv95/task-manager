@@ -1,20 +1,19 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { DragDropContext, Droppable, Draggable, DropResult } from 'react-beautiful-dnd';
 import { Button } from '../../../components/elements/Button';
 import { ButtonTheme } from '../../../components/elements/Button/ui/Button';
-import { AddTask } from '../../../components/modules/AddTask';
 import { Column } from '../../../components/modules/Column';
+import { EditTask } from '../../../components/modules/EditTask';
 import { Header } from '../../../components/modules/Header';
 import { Modal } from '../../../components/modules/Modal';
 import { Task } from '../../../components/modules/Task';
 import { selectProjects } from '../../../store/projects/selector';
+import { updateTask } from '../../../store/tasks/actions';
 import { selectAllTasks } from '../../../store/tasks/selector';
 import { IProject, ITask, Status } from '../../../utils/data';
 import './Tasks.scss';
-import { useDispatch } from 'react-redux';
-import { updateTask } from '../../../store/tasks/actions';
     
 interface TasksProps {
 }
@@ -47,14 +46,14 @@ export const Tasks = () => {
     
     return (
         <>
-            <Header title={'Tasks'}/>
+            <Header title='Tasks'/>
             <Button theme={ButtonTheme.CLEAR} onClick={() => navigate(-1)}>
                 ← Back
             </Button>
             <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                 ➕ Add Task
             </Button>
-            <div className='tasks'>
+            <div className='columns'>
                 <DragDropContext onDragEnd={onDragEnd}>
                     {columns.map(column => (
                         <Droppable key={column} droppableId={column}>
@@ -79,7 +78,7 @@ export const Tasks = () => {
             </div>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>
-                <AddTask onCancel={() => setOpenModal(false)} projectId={id!}/>
+                <EditTask onCancel={() => setOpenModal(false)} projectId={id!}/>
             </Modal>}
         </>
     );
