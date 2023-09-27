@@ -3,11 +3,14 @@
 .project {
     width: 30rem;
     transition: all 0.2s;
-    & a{
+    position: relative;
+    overflow: hidden;
+    & a {
         &:hover {
             opacity: 1;
         }
     }
+
     &:hover {
         transform: scale(1.02);
     }

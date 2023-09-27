@@ -31,20 +31,18 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
     case TasksActions.DELETE_TASK: {
 
         const { 
-            [payload.id]: taskToDelete,
+            [payload]: taskToDelete,
             ...filteredTasks
         } = state.entities;
 
-        console.log(state)
-        console.log(filteredTasks)
         return {
-            ids: state.ids.filter(id => id! == payload.id),
+            ids: state.ids.filter(id => id !== payload),
             entities: filteredTasks
         };
     }
     case TasksActions.DELETE_ALL_PROJECT_TASKS: {
         let filteredTasks = state.entities;
-        for (const taskId in payload.tasksIds) {
+        for (const taskId in payload) {
             const { 
                 [taskId]: taskToDelete,
                 ...otherTasks
@@ -52,7 +50,7 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
             filteredTasks = otherTasks
         }
         return {
-            ids: state.ids.filter(id => !payload.tasksIds.includes(id)),
+            ids: state.ids.filter(id => !payload.includes(id)),
             entities: filteredTasks
         };
     }

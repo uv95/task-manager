@@ -1,5 +1,5 @@
 .projectsContainer {
-    & .button {
+    & .addProjectButton {
         display: block;
         margin-left: auto;
         margin-bottom: 2rem;
@@ -10,4 +10,8 @@
     display: flex;
     gap: 4rem;
     flex-wrap: wrap;
+}
+
+.noProjects{
+    font-size: initial;
 }

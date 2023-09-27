@@ -20,11 +20,11 @@ export const Projects = () => {
         <>
             <Header><h1>Projects</h1></Header>
             <main className='projectsContainer'>
-                <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
+                <Button className='addProjectButton' theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                     ➕ Add Project
                 </Button>
                 <div className='projects'>
-                    {projectsLength === 0 ? <p>No projects yet.</p> :    
+                    {projectsLength === 0 ? <p className='noProjects'>No projects yet.</p> :    
                         Object.values(projects).map((project: IProject) => (
                             <Project key={project.id} project={project} id={project.id}/>
                         ))}

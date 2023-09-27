@@ -29,16 +29,13 @@ export const projects = (state: NormalizedData<IProject> = initialState, action:
         };
     }
     case ProjectsActions.DELETE_PROJECT: {
-
         const { 
-            [payload.id]: projectToDelete,
+            [payload]: projectToDelete,
             ...filteredProjects
         } = state.entities;
 
-        console.log(state)
-        console.log(filteredProjects)
         return {
-            ids: state.ids.filter(id => id! == payload.id),
+            ids: state.ids.filter(id => id !== payload),
             entities: filteredProjects
         };
     }

@@ -18,7 +18,6 @@ export const AddProject = ({ onCancel }: AddProjectProps) => {
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()
         dispatch(addProject(formData))
-        console.log('project added')
         onCancel()
     }
 
@@ -34,10 +33,8 @@ export const AddProject = ({ onCancel }: AddProjectProps) => {
         <div className='addProject'>
             <h2>New Project</h2>
             <form onSubmit={onSubmit}>
-                <div className="input">
-                    <label htmlFor="title">Title</label>
-                    <input type="text" id='title' placeholder='Project title' value={formData.title} onChange={onChange}/>
-                </div>
+                <input type="text" id='title' placeholder='Project title' value={formData.title} onChange={onChange}/>
+      
                 <div className="buttons">
                     <Button theme={ButtonTheme.OUTLINE} onClick={onCancel}>Cancel</Button>
                     <Button type='submit' theme={ButtonTheme.PRIMARY}>Add</Button>

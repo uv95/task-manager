@@ -48,7 +48,7 @@ export const Tasks = () => {
         <>
             <Header><h1><Link to='/'>{projects[id].title} / </Link> tasks</h1></Header>
             <main>
-                <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
+                <Button className='addTaskButton' theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                     ➕ Add Task
                 </Button>
                 <div className='columns'>
