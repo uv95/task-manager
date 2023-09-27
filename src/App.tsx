@@ -8,9 +8,7 @@ function App() {
     return (
         <Provider store={store}>
             <BrowserRouter>
-                <main id='main'>
-                    <AppRouter/>
-                </main>
+                <AppRouter/>
             </BrowserRouter>
         </Provider>
     );

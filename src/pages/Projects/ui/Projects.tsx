@@ -20,15 +20,17 @@ export const Projects = () => {
     console.log(projects)
     return (
         <>
-            <Header title={'Projects'}/>
-            <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
-                ➕ Add Project
-            </Button>
-            <div className='Projects'>
-                {Object.values(projects).map((project: IProject) => (
-                    <Project key={project.id} title={project.title} id={project.id}/>
-                ))}
-            </div>
+            <Header><h1>Projects</h1></Header>
+            <main>
+                <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
+                    ➕ Add Project
+                </Button>
+                <div className='Projects'>
+                    {Object.values(projects).map((project: IProject) => (
+                        <Project key={project.id} title={project.title} id={project.id}/>
+                    ))}
+                </div>
+            </main>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>
                 <AddProject onCancel={() => setOpenModal(false)}/>

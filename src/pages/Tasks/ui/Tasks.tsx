@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button } from '../../../components/elements/Button';
 import { ButtonTheme } from '../../../components/elements/Button/ui/Button';
 import { Column } from '../../../components/modules/Column';
@@ -46,36 +46,35 @@ export const Tasks = () => {
     
     return (
         <>
-            <Header title='Tasks'/>
-            <Button theme={ButtonTheme.CLEAR} onClick={() => navigate(-1)}>
-                ← Back
-            </Button>
-            <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
-                ➕ Add Task
-            </Button>
-            <div className='columns'>
-                <DragDropContext onDragEnd={onDragEnd}>
-                    {columns.map(column => (
-                        <Droppable key={column} droppableId={column}>
-                            {(provided, snapshot) => (
-
-                                <Column title={column} {...provided.droppableProps} ref={provided.innerRef} isDraggingOver={snapshot.isDraggingOver }>
-                                    {projects[id].tasks.map((taskId: string, index: number) => (
-                                        tasks[taskId].status === column && 
+            <Header><h1><Link to='/'>{projects[id].title} / </Link> tasks</h1></Header>
+            <main>
+                <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
+                    ➕ Add Task
+                </Button>
+                <div className='columns'>
+                    <DragDropContext onDragEnd={onDragEnd}>
+                        {columns.map(column => (
+                            <Droppable key={column} droppableId={column}>
+                                {(provided, snapshot) => (
+                                
+                                    <Column title={column} {...provided.droppableProps} ref={provided.innerRef} isDraggingOver={snapshot.isDraggingOver }>
+                                        {projects[id].tasks.map((taskId: string, index: number) => (
+                                            tasks[taskId].status === column && 
                                             <Draggable key={taskId} draggableId={taskId} index={index}>
                                                 {(provided, snapshot) => (
                                                     <Task task={tasks[taskId]} projectId={id} ref={provided.innerRef} provided={provided} /> 
                                                 )}
                                                
                                             </Draggable>
-                                    ))}
-                                    {provided.placeholder}
-                                </Column>
-                            )}
-                        </Droppable>
-                    ))}
-                </DragDropContext>
-            </div>
+                                        ))}
+                                        {provided.placeholder}
+                                    </Column>
+                                )}
+                            </Droppable>
+                        ))}
+                    </DragDropContext>
+                </div>
+            </main>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>
                 <EditTask onCancel={() => setOpenModal(false)} projectId={id!}/>

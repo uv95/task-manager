@@ -1,3 +1,5 @@
+@import '../../../../index.scss';
+
 .button {
     border: 0;
     background-color: inherit;
@@ -10,9 +12,8 @@
     font-family: 'Titillium Web', sans-serif;
     font-weight: 400;
 
-  
     &:hover{
-      opacity: 0.8;
+      opacity: 0.7;
     }
   
     &:active{
@@ -20,12 +21,15 @@
     }
 
     &-primary {
-        background-color: rgb(152, 152, 255);
+        font-weight: 600;
+        color: white;
+        background-color: $color-gray;
       }
     &-outline {
-        border: 1px solid black;
+        border: 1px solid $color-gray--light;
       }
     &-clear {
         padding: 0;
+        height: fit-content;
       }
 }

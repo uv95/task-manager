@@ -1,13 +1,14 @@
+import { ReactNode } from 'react';
 import './Header.scss';
     
 interface HeaderProps {
-    title: string
+    children: ReactNode
 }
     
-export const Header = ({ title}: HeaderProps) => {
+export const Header = ({ children}: HeaderProps) => {
     return (
-        <div className='Header'>
-            <h1>{title}</h1>
-        </div>
+        <header className='header'>
+            {children}
+        </header>
     );
 };
