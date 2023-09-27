@@ -10,7 +10,7 @@ interface ProjectProps {
 export const Project = ({title, id}: ProjectProps) => {
     return (
         <Link to={`/${id}`}>
-            <Card className='task'>
+            <Card className='project'>
                 <h2>{title}</h2>
             </Card>
         </Link>

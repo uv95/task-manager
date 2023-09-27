@@ -1,4 +1,4 @@
-import { HtmlHTMLAttributes, ReactNode } from 'react';
+import { forwardRef, HtmlHTMLAttributes, ReactNode } from 'react';
 import './Card.scss';
     
 interface CardProps extends HtmlHTMLAttributes<HTMLDivElement> {
@@ -6,10 +6,10 @@ interface CardProps extends HtmlHTMLAttributes<HTMLDivElement> {
     className?: string;
 }
     
-export const Card = ({children, className, ...otherProps }: CardProps) => {
+export const Card = forwardRef<HTMLDivElement, CardProps>(function Card({children, className, ...otherProps }, ref) {
     return (
-        <div className={`card ${className || ''}`} {...otherProps}>
+        <div ref={ref} className={`card ${className || ''}`} {...otherProps}>
             {children}
         </div>
     );
-};
+});
