@@ -20,11 +20,15 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
         };
     }
     case TasksActions.UPDATE_TASK: {
+        const task = state.entities[payload.taskId]
         return {
             ...state,
             entities: {
                 ...state.entities,
-                [payload.id]: payload 
+                [payload.taskId]: {
+                    ...task,
+                    ...payload.updatedFields
+                } 
             }
         };
     }
@@ -52,6 +56,36 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
         return {
             ids: state.ids.filter(id => !payload.includes(id)),
             entities: filteredTasks
+        };
+    }
+    case TasksActions.ADD_SUBTASK_ID: {
+        const {taskId, subtaskId} = payload
+        const task = state.entities[taskId]
+        return {
+            ...state,
+            entities: {
+                ...state.entities,
+                [taskId]: {
+                    ...task,
+                    subtasks: [...task.subtasks, subtaskId]
+                }
+                
+            }
+        };
+    }
+    case TasksActions.DELETE_SUBTASK_ID: {
+        const {taskId, subtaskId} = payload
+        const task = state.entities[taskId]
+        return {
+            ...state,
+            entities: {
+                ...state.entities,
+                [taskId]: {
+                    ...task,
+                    subtasks: task.subtasks.filter(id => id!==subtaskId)
+                }
+                
+            }
         };
     }
     default: {

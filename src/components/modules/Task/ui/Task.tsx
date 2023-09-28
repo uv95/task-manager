@@ -1,5 +1,6 @@
 import { forwardRef, HtmlHTMLAttributes, useState } from 'react';
 import { DraggableProvided } from 'react-beautiful-dnd';
+import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { ITask } from '../../../../utils/types';
 import { Card } from '../../../elements/Card';
 import { Tag } from '../../../elements/Tag';
@@ -17,6 +18,12 @@ interface TaskProps extends HtmlHTMLAttributes<HTMLDivElement> {
     
 export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, projectId, provided}, ref) {
     const [openModal, setOpenModal] = useState(false)
+    const { setSubtasks } = useSubtasksContext()
+  
+    const onCloseModal = () => {
+        setOpenModal(false)
+        setSubtasks([])
+    }
 
     return (
         <>
@@ -31,7 +38,7 @@ export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, 
                 </div>
             </Card>
 
-            {openModal && <Modal onClose={() => setOpenModal(false)}>
+            {openModal && <Modal onClose={onCloseModal}>
                 <TaskInfo task={task} projectId={projectId}/>
             </Modal>}
         </>

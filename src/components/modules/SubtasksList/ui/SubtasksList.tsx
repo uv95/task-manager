@@ -1,7 +1,9 @@
-import { Dispatch, SetStateAction } from 'react';
+import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { ISubtask } from '../../../../utils/types';
-import { AddSubtasks } from '../../AddSubtasks';
+import { Button } from '../../../elements/Button';
+import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { Subtask } from '../../Subtask/ui/Subtask';
 import './SubtasksList.scss';
     
@@ -13,17 +15,18 @@ interface SubtasksListProps {
     
 export const SubtasksList = ({ initialSubtasks, taskId, cantEdit }: SubtasksListProps) => {
     const { subtasks, setSubtasks } = useSubtasksContext()
-    const editText = (task: ISubtask, newText: string) => setSubtasks && setSubtasks(prev => (prev.map(t => t.text===task.text ? {...t, text: newText} : t)))
+    const addNewSubtask = () => setSubtasks(prev => [...prev, {id: uuidv4(), text: '', isDone: false}])
 
-    const toggleIsDone = (task: ISubtask) => setSubtasks && setSubtasks(prev => (prev.map(t => t.text===task.text ? {...t, isDone: !t.isDone} : t)))
+    useEffect(() => {
+        if(initialSubtasks.length !== 0) setSubtasks(initialSubtasks)
+    }, [])
 
     return (
         <div className='subtasksList'>
-            {(initialSubtasks.length ? initialSubtasks : subtasks).map((task, index) => (
-                <Subtask key={index} subtask={task} toggleIsDone={() => toggleIsDone(task)} editText={(newText: string) => editText(task, newText)} cantEdit={cantEdit}/>
-            ))}
-
-            <AddSubtasks initialSubtasks={subtasks} taskId={taskId} cantEdit={cantEdit}/>
+            {subtasks.map((subtask) => (
+                <Subtask key={subtask.id} taskId={taskId} subtask={subtask} cantEdit={cantEdit}/>
+            )) }
+            {!cantEdit && <Button theme={ButtonTheme.OUTLINE} onClick={addNewSubtask}>➕ New Subtask</Button>}
         </div>
     );
 };

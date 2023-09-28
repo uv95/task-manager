@@ -1,13 +1,11 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { useSubtasksContext } from '../../../../context/SubtasksContext';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteTaskId } from '../../../../store/projects/actions';
 import { selectProjects } from '../../../../store/projects/selector';
 import { deleteTask } from '../../../../store/tasks/actions';
-import { IProject, ITask } from '../../../../utils/types';
 import { formatDate } from '../../../../utils/formatDate';
 import { getTimeInProgress } from '../../../../utils/getTimeInProgress';
+import { IProject, ITask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { Tag } from '../../../elements/Tag';
@@ -26,7 +24,6 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
     const projects = useSelector(selectProjects) as Record<string, IProject>
     const projectTitle = projects[projectId].title;
     const taskInProgressFor = getTimeInProgress(task.starts);
-    const {setSubtasks} = useSubtasksContext();
 
     const [editTask, setEditTask] = useState(false);
 
@@ -34,8 +31,6 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
         dispatch(deleteTask(task.id))
         dispatch(deleteTaskId({taskId: task.id, projectId}))
     }
-
-    console.log(task)
 
     return (
         <>
@@ -58,17 +53,14 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
                     <div className='info'>In progress: {taskInProgressFor}</div>
                     <div className='info'>{task.description}</div>
                     <div className="info">Subtasks: {}</div>
-                    <SubtasksList initialSubtasks={task.subtasks} cantEdit/>
+                    <SubtasksList initialSubtasks={task.subtasks} cantEdit taskId={task.id}/>
                     <Button theme={ButtonTheme.OUTLINE} onClick={onDelete}>
                         Delete
                     </Button>
                 </>}
             </div>
 
-            {editTask && <EditTask task={task} onCancel={() => {
-                setEditTask(false) 
-                setSubtasks([])
-            }} projectId={projectId}/>}
+            {editTask && <EditTask task={task} onClose={() => setEditTask(false)} projectId={projectId}/>}
             
         </>
     );

@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { Button } from '../../../components/elements/Button';
 import { ButtonTheme } from '../../../components/elements/Button/ui/Button';
 import { Column } from '../../../components/modules/Column';
@@ -14,12 +14,9 @@ import { updateTask } from '../../../store/tasks/actions';
 import { selectAllTasks } from '../../../store/tasks/selector';
 import { IProject, ITask, Status } from '../../../utils/types';
 import './Tasks.scss';
-    
-interface TasksProps {
-}
+
     
 export const Tasks = () => {
-    const navigate = useNavigate()
     const params = useParams();
     const id = params.id!;
     const dispatch = useDispatch()
@@ -36,10 +33,10 @@ export const Tasks = () => {
         const { destination, draggableId} = result;
         const destinationStatus = destination.droppableId
 
-        dispatch(updateTask({
+        dispatch(updateTask({taskId: draggableId, updatedFields:{
             ...tasks[draggableId],
             status: destinationStatus as Status
-        }))
+        }}))
     }
 
     if (!projects[id]) return <p>No project found!</p>
@@ -47,7 +44,7 @@ export const Tasks = () => {
     return (
         <>
             <Header><h1><Link to='/'>{projects[id].title} / </Link> tasks</h1></Header>
-            <main>
+            <main id='main'>
                 <Button className='addTaskButton' theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                     ➕ Add Task
                 </Button>
@@ -77,7 +74,7 @@ export const Tasks = () => {
             </main>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>
-                <EditTask onCancel={() => setOpenModal(false)} projectId={id!}/>
+                <EditTask onClose={() => setOpenModal(false)} projectId={id!}/>
             </Modal>}
         </>
     );

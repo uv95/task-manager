@@ -19,7 +19,7 @@ export const Projects = () => {
     return (
         <>
             <Header><h1>Projects</h1></Header>
-            <main className='projectsContainer'>
+            <main id='main' className='projectsContainer'>
                 <Button className='addProjectButton' theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
                     ➕ Add Project
                 </Button>

@@ -1,16 +1,14 @@
 .subtask {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     gap: 1rem;
+
+    & .button {
+        width: fit-content;
+    }
 }
 
-.input {
-    &-disabled{
-        background-color: inherit;
-        border: none;
-        pointer-events: none;
-        &:focus{
-        outline: none;
-        }
-    }
+.isDisabled{
+    border: none;
+    background-color: inherit;
 }

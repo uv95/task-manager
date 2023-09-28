@@ -19,6 +19,7 @@ export interface ITask {
 }
 
 export interface ISubtask {
+    id: string,
     text: string,
     isDone: boolean
 }

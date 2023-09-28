@@ -13,14 +13,15 @@ import { SubtasksList } from '../../SubtasksList';
 import './EditTask.scss';
     
 interface EditTaskProps {
-    onCancel: () => void
+    onClose: () => void
     projectId: string
     task?: ITask
 }
     
-export const EditTask = ({onCancel, projectId, task }: EditTaskProps) => {
+export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
     const dispatch = useDispatch();
-    const {subtasks, setSubtasks} = useSubtasksContext();
+
+    const {subtasks} = useSubtasksContext();
     const [formData, setFormData] = useState<ITask>({
         id: task?.id || '',
         title: task?.title || '',
@@ -32,29 +33,23 @@ export const EditTask = ({onCancel, projectId, task }: EditTaskProps) => {
         status: task?.status || Status.QUEUE,
         comments: task?.comments || [],
         subtasks: task?.subtasks || subtasks
-    })
-
-    if(task) setSubtasks(formData.subtasks)
-
-    const subtasksHaveChanged = !subtasks.every(({text}, index) => formData.subtasks.some((s, i) => i===index && s.text===text))
-
-    if(subtasksHaveChanged) setFormData({...formData, subtasks})
+    })    
 
     const onSubmit = (e:FormEvent) => {
         e.preventDefault()
         if(task) {
-            dispatch(updateTask({...formData, subtasks}))
+            dispatch(updateTask({taskId: task.id, updatedFields:{...formData, subtasks}}))
         } else {
-            dispatch(addTask(formData))
-            dispatch(addTaskId({taskId: formData.id, projectId}))
+            const newId = uuidv4()
+            dispatch(addTask({...formData, id: newId, subtasks}))
+            dispatch(addTaskId({taskId: newId, projectId}))
         }
-        onCancel()
+        onClose()
     }
 
     const onChange = (e:ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({
             ...formData,
-            id: uuidv4(),
             [e.target.id]: e.target.value
         })
     }
@@ -64,21 +59,21 @@ export const EditTask = ({onCancel, projectId, task }: EditTaskProps) => {
             {!task && <h2>New Task</h2>}
             <form onSubmit={onSubmit}>
                 <div className="input">
-                    {!task && <label htmlFor="title">Title:</label>}
-                    <input className={`${task ? 'input-title' : ''}`} type="text" id='title' placeholder='Task title' value={formData.title} onChange={onChange}/>
+                    {!task && <label className='required' htmlFor="title">Title</label>}
+                    <input className={`${task ? 'input-title' : ''}`} type="text" id='title' required placeholder='Task title' value={formData.title} onChange={onChange}/>
                 </div>
                 <div className="input">
-                    <label htmlFor="starts">Starts:</label>
-                    <input type='date' id='starts' value={formData.starts} onChange={onChange}/>
+                    <label className='required' htmlFor="starts">Starts</label>
+                    <input type='date' id='starts' required value={formData.starts} onChange={onChange}/>
                 </div>
                 <div className="input">
-                    <label htmlFor="ends">Ends:</label>
-                    <input type="date" id='ends' value={formData.ends} onChange={onChange}/>
+                    <label className='required' htmlFor="ends">Ends</label>
+                    <input type="date" id='ends' required value={formData.ends} onChange={onChange}/>
                 </div>
 
                 <div className="selects">
                     <div className="input">
-                        <label htmlFor="status">Status:</label>
+                        <label htmlFor="status">Status</label>
                         <Select id="status" options={Object.values(Status)} defaultOption={formData.status} setSelected={(option:string) => setFormData(prev => ({
                             ...prev,
                             status: option as Status
@@ -86,7 +81,7 @@ export const EditTask = ({onCancel, projectId, task }: EditTaskProps) => {
                     </div>
                     <div className="input">
 
-                        <label htmlFor="priority">Priority:</label>
+                        <label htmlFor="priority">Priority</label>
                         <Select id="priority" options={Object.values(PriorityTypes)} defaultOption={formData.priority} setSelected={(option:string) => setFormData(prev => ({
                             ...prev,
                             priority: option as PriorityTypes
@@ -99,7 +94,7 @@ export const EditTask = ({onCancel, projectId, task }: EditTaskProps) => {
                 <SubtasksList initialSubtasks={formData.subtasks} taskId={task?.id}/>  
 
                 <div className="buttons">
-                    <Button theme={ButtonTheme.OUTLINE} onClick={onCancel}>Cancel</Button>
+                    <Button theme={ButtonTheme.OUTLINE} onClick={onClose}>Cancel</Button>
                     <Button type='submit' theme={ButtonTheme.PRIMARY}>{task ? 'Save' : 'Add'}</Button>
                 </div>
             </form>
