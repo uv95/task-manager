@@ -1,0 +1,30 @@
+@import '../../../../index.scss';
+
+.comment {
+    padding: 1rem;
+    border-radius: 1rem;
+    margin-left: auto;
+    background-color: $color-bg;
+    margin-bottom: 1rem;
+   }
+
+   
+   .author {
+       font-weight: 600;
+   
+       & span {
+           font-weight: 300;
+           font-size: 1.5rem;
+           color: gray;
+       }
+   }
+   
+   .deleteCommentButton {
+       margin-left: auto;
+   }
+
+   .replyButton {
+       font-size: 1.5rem;
+       display: inline-block;
+       color: rgb(17, 17, 82);
+   }
