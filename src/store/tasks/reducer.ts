@@ -1,3 +1,4 @@
+import { deleteAllReplies } from "../../utils/deleteAllReplies";
 import { ITask, NormalizedData } from "../../utils/types";
 import { TasksActions } from "./actions";
 
@@ -46,7 +47,7 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
     }
     case TasksActions.DELETE_ALL_PROJECT_TASKS: {
         let filteredTasks = state.entities;
-        for (const taskId in payload) {
+        for (const taskId of payload) {
             const { 
                 [taskId]: taskToDelete,
                 ...otherTasks
@@ -83,6 +84,36 @@ export const tasks = (state:NormalizedData<ITask> = initialState, action: { type
                 [taskId]: {
                     ...task,
                     subtasks: task.subtasks.filter(id => id!==subtaskId)
+                }
+                
+            }
+        };
+    }
+    case TasksActions.ADD_COMMENT_ID: {
+        const {taskId, commentId} = payload
+        const task = state.entities[taskId]
+        return {
+            ...state,
+            entities: {
+                ...state.entities,
+                [taskId]: {
+                    ...task,
+                    comments: [...task.comments, commentId]
+                }
+                
+            }
+        };
+    }
+    case TasksActions.DELETE_COMMENT_ID: {
+        const {taskId, commentId} = payload
+        const task = state.entities[taskId]
+        return {
+            ...state,
+            entities: {
+                ...state.entities,
+                [taskId]: {
+                    ...task,
+                    comments: task.comments.filter(id => id!==commentId)
                 }
                 
             }
