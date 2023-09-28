@@ -26,9 +26,10 @@ export interface ISubtask {
 
 export interface IComment {
     id: string,
+    author: string,
     text: string,
-    comment: string,
-    task: ITask[]
+    createdAt: string,
+    replyTo: string,
 }
 
 export enum Status {
