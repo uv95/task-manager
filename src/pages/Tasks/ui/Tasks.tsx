@@ -12,8 +12,9 @@ import { SearchTask } from '../../../components/modules/SearchTask';
 import { Task } from '../../../components/modules/Task';
 import { selectCurrentProject } from '../../../store/projects/selector';
 import { updateTask } from '../../../store/tasks/actions';
-import { selectAllTasks, selectProjectTasks, selectVisibleTasks } from '../../../store/tasks/selector';
+import { selectAllTasks, selectVisibleTasks } from '../../../store/tasks/selector';
 import { ITask, Status } from '../../../utils/types';
+import { PlusIcon } from '@heroicons/react/24/solid'       
 import './Tasks.scss';
     
 export const Tasks = () => {
@@ -22,10 +23,10 @@ export const Tasks = () => {
     const dispatch = useDispatch()
     const tasks = useSelector(selectAllTasks) as Record<string, ITask>
     const project = useSelector(selectCurrentProject(id))
-    const projectTasks = useSelector(selectProjectTasks(id))
     
     const [openModal, setOpenModal] = useState(false)
     const [searchInput, setSearchInput] = useState('')
+    
     const visibleTasks = useSelector(selectVisibleTasks(searchInput))
 
     const columns = Object.values(Status)
@@ -42,8 +43,6 @@ export const Tasks = () => {
         }}))
     }
 
-    console.log(visibleTasks, 'visibleTasks')
-
     if (!project) return <p>No project found!</p>
     
     return (
@@ -53,7 +52,7 @@ export const Tasks = () => {
                 <div className="tasksHeading">
                     <SearchTask input={searchInput} setInput={setSearchInput} />
                     <Button theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
-                        ➕ Add Task
+                        <PlusIcon width={15}/> Add Task
                     </Button>
                 </div>
 

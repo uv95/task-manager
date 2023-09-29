@@ -1,13 +1,11 @@
 import { HtmlHTMLAttributes } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { deleteComment } from '../../../../store/comments/actions';
 import { selectAllComments } from '../../../../store/comments/selector';
 import { deleteCommentId } from '../../../../store/tasks/actions';
 import { selectCurrentTask } from '../../../../store/tasks/selector';
 import { IComment, ITask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
-import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import './Comment.scss';
     
 interface CommentProps extends HtmlHTMLAttributes<HTMLDivElement> {
@@ -30,9 +28,9 @@ export const Comment = ({ width, comment, taskId, onReplyToComment}: CommentProp
     }
     return (
         <div className='comment' style={{width}}>
-            <div className='author'>{comment.author} <span>{comment.createdAt}</span> <Button className='replyButton' theme={ButtonTheme.CLEAR} onClick={onReplyToComment}>/Reply</Button></div>
-            <p>{comment.text}</p>
-            <Button className='deleteCommentButton' theme={ButtonTheme.CLEAR} onClick={() => onDeleteComment(comment.id)}>Delete</Button>
+            <div className='comment-author'>{comment.author} <span>{comment.createdAt}</span> <Button className='replyButton' onClick={onReplyToComment}>/Reply</Button></div>
+            <p className='comment-text'>{comment.text}</p>
+            <Button className='deleteCommentButton' onClick={() => onDeleteComment(comment.id)}>Delete</Button>
         </div>
     );
 };

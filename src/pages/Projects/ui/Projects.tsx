@@ -8,8 +8,9 @@ import { Modal } from '../../../components/elements/Modal';
 import { Project } from '../../../components/modules/Project';
 import { selectProjects, selectProjectsLength } from '../../../store/projects/selector';
 import { IProject } from '../../../utils/types';
+import { PlusIcon } from '@heroicons/react/24/solid'       
 import './Projects.scss';
-        
+
 export const Projects = () => {
     const [openModal, setOpenModal] = useState(false)
     const projects = useSelector(selectProjects)
@@ -20,7 +21,7 @@ export const Projects = () => {
             <Header><h1>Projects</h1></Header>
             <main id='main' className='projectsContainer'>
                 <Button className='addProjectButton' theme={ButtonTheme.PRIMARY} onClick={() => setOpenModal(true)}>
-                    ➕ Add Project
+                    <PlusIcon width={15}/> Add Project
                 </Button>
                 <div className='projects'>
                     {projectsLength === 0 ? <p className='noProjects'>No projects yet.</p> :    
@@ -28,6 +29,7 @@ export const Projects = () => {
                             <Project key={project.id} project={project} id={project.id}/>
                         ))}
                 </div>
+
             </main>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>

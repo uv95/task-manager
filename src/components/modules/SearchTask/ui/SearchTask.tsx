@@ -1,7 +1,8 @@
-import { ChangeEvent, Dispatch, SetStateAction, useRef, useState } from 'react';
+import { MagnifyingGlassIcon } from '@heroicons/react/24/solid';
+import { ChangeEvent, Dispatch, SetStateAction, useRef } from 'react';
 import { Button } from '../../../elements/Button';
-import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import './SearchTask.scss';
+
     
 interface SearchTaskProps {
     input: string,
@@ -20,9 +21,9 @@ export const SearchTask = ({input, setInput}: SearchTaskProps) => {
 
     return (
         <div className='searchTask'>
-            <p>🔍</p>
+            <MagnifyingGlassIcon width={15}/>
             <input ref={ref} type="text" placeholder='Search by # or title' value={input} onChange={onChange}/>
-            {input && <Button theme={ButtonTheme.CLEAR} onClick={resetInput}>✕</Button>}
+            {input && <Button onClick={resetInput}>✕</Button>}
         </div>
     );
 };

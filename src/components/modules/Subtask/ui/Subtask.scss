@@ -1,3 +1,5 @@
+@import '../../../../index.scss';
+
 .subtask {
     display: flex;
     flex-direction: column;
@@ -6,9 +8,35 @@
     & .button {
         width: fit-content;
     }
+
+    & input {
+        width: 100%;
+        border: none;
+        &:focus{
+            background: inherit;
+        }
+    }
 }
 
 .isDisabled{
     border: none;
     background-color: inherit;
+}
+
+.checkIcon{
+    cursor: pointer;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid $color-gray;
+    border-radius: 0.3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &-checked {
+        background-color: $color-gray;
+        & svg {
+            stroke: white;
+        }
+    }
 }

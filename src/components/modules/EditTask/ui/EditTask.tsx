@@ -21,7 +21,7 @@ interface EditTaskProps {
 export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
     const dispatch = useDispatch();
 
-    const {subtasks} = useSubtasksContext();
+    const {subtasks, setSubtasks} = useSubtasksContext();
     const [formData, setFormData] = useState<ITask>({
         id: task?.id || '',
         title: task?.title || '',
@@ -60,7 +60,7 @@ export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
             <form onSubmit={onSubmit}>
                 <div className="input">
                     {!task && <label className='required' htmlFor="title">Title</label>}
-                    <input className={`${task ? 'input-title' : ''}`} type="text" id='title' required placeholder='Task title' value={formData.title} onChange={onChange}/>
+                    <input autoFocus className={`${task ? 'input-title' : ''}`} type="text" id='title' required placeholder='Task title' value={formData.title} onChange={onChange}/>
                 </div>
                 <div className="input">
                     <label className='required' htmlFor="starts">Starts</label>
@@ -73,16 +73,13 @@ export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
 
                 <div className="selects">
                     <div className="input">
-                        <label htmlFor="status">Status</label>
-                        <Select id="status" options={Object.values(Status)} defaultOption={formData.status} setSelected={(option:string) => setFormData(prev => ({
+                        <Select label='Status' options={Object.values(Status)} defaultOption={formData.status} setSelected={(option:string) => setFormData(prev => ({
                             ...prev,
                             status: option as Status
                         }))}/>
                     </div>
                     <div className="input">
-
-                        <label htmlFor="priority">Priority</label>
-                        <Select id="priority" options={Object.values(PriorityTypes)} defaultOption={formData.priority} setSelected={(option:string) => setFormData(prev => ({
+                        <Select label='Priority' options={Object.values(PriorityTypes)} defaultOption={formData.priority} setSelected={(option:string) => setFormData(prev => ({
                             ...prev,
                             priority: option as PriorityTypes
                         }))}/>
@@ -94,7 +91,11 @@ export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
                 <SubtasksList initialSubtasks={formData.subtasks} taskId={task?.id}/>  
 
                 <div className="buttons">
-                    <Button theme={ButtonTheme.OUTLINE} onClick={onClose}>Cancel</Button>
+                    
+                    <Button theme={ButtonTheme.OUTLINE} onClick={() => {
+                        setSubtasks([])
+                        onClose()
+                    }}>Cancel</Button>
                     <Button type='submit' theme={ButtonTheme.PRIMARY}>{task ? 'Save' : 'Add'}</Button>
                 </div>
             </form>

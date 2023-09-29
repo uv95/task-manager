@@ -5,6 +5,7 @@ import { ISubtask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { Subtask } from '../../Subtask/ui/Subtask';
+import { PlusIcon } from '@heroicons/react/24/solid'       
 import './SubtasksList.scss';
     
 interface SubtasksListProps {
@@ -26,7 +27,7 @@ export const SubtasksList = ({ initialSubtasks, taskId, cantEdit }: SubtasksList
             {subtasks.map((subtask) => (
                 <Subtask key={subtask.id} taskId={taskId} subtask={subtask} cantEdit={cantEdit}/>
             )) }
-            {!cantEdit && <Button theme={ButtonTheme.OUTLINE} onClick={addNewSubtask}>➕ New Subtask</Button>}
+            {!cantEdit && <Button className='addSubtaskButton' theme={ButtonTheme.OUTLINE} onClick={addNewSubtask}><PlusIcon width={15}/> New Subtask</Button>}
         </div>
     );
 };

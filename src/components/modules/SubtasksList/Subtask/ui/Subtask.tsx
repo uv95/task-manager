@@ -1,10 +1,10 @@
 import { CheckIcon } from '@heroicons/react/24/outline';
 import { ChangeEvent } from 'react';
 import { useDispatch } from 'react-redux';
-import { useSubtasksContext } from '../../../../context/SubtasksContext';
-import { updateTask } from '../../../../store/tasks/actions';
-import { ISubtask } from '../../../../utils/types';
-import { Button } from '../../../elements/Button';
+import { useSubtasksContext } from '../../../../../context/SubtasksContext';
+import { updateTask } from '../../../../../store/tasks/actions';
+import { ISubtask } from '../../../../../utils/types';
+import { Button } from '../../../../elements/Button';
 import './Subtask.scss';
     
 interface SubtaskProps {

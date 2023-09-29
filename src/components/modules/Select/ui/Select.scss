@@ -1,31 +1,67 @@
 @import '../../../../index.scss';
 
 .select {
+    display: flex;
+    align-items: center;
+    width: 22rem;
+    position: relative;
+}
+
+.dropdown {
     width: 15rem;
     border: 1px solid  $color-gray--light;
-    position: relative;
-    height: 4rem;
-    padding: 0 1rem;
+    background-color: #fff;
+    max-height: 4rem;
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: max-height 0.2s;
+    position: absolute;
+    right: 0;
+    top: -0.5rem;
+    display: flex;
+    flex-direction: column;
+
+    &-open {
+        height: 12rem;
+        max-height: 12rem;
+        & .options {
+
+        }
+    }
 }
 
 .defaultOption {
     cursor: pointer;
+    display: flex;
+    padding: 0 1rem;
+    align-items: center;
+    min-height: 4rem;
+    &:hover{
+        background-color: $color-bg;
+    }
 }
 
-.options {
-    width: calc(100% + 0.1rem);
-    position: absolute;
-    left: -0.05rem;
-    top: 3.9rem;
-    background-color: #fff;
-    z-index: 2;
-    border-left: 1px solid  $color-gray--light;
-    border-right: 1px solid  $color-gray--light;
-}
 
 .option {
-    cursor: pointer;
-    border-bottom: 1px solid  $color-gray--light;
+    width: 100%;
     height: 4rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
     padding: 0 1rem;
+    position: relative;
+
+    &:after{
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 1px;
+        background-color: $color-gray--light;
+        width: 100%;
+    }
+
+    &:hover{
+        background-color: $color-bg;
+    }
 }

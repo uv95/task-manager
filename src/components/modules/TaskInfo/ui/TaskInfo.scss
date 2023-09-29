@@ -3,16 +3,31 @@
 .taskInfo {
     width: 80rem;
     min-width: 90%;
+
+    &-heading {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+    }
+
+    &-buttons {
+        display: flex;
+        gap: 3rem;
+
+    }
 }
 
-.heading {
+.taskInfoHeading {
     display: flex;
     justify-content: space-between;
     margin-bottom: 2rem;
 }
 
 .additionalInfo {
-    color: gray;
+    color: $color-gray--medium;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.5rem;
 }
 

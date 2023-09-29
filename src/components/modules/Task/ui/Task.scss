@@ -9,6 +9,7 @@
     gap: 1rem;
     margin-bottom: 2rem;
     overflow: hidden;
+    cursor: pointer !important;
 
     & h2 {
         display: -webkit-box;
@@ -66,8 +67,20 @@
     align-items: center;
     gap: 1rem;
 
+    
     & .tag {
-    margin-left: auto;    
+        margin-left: auto;    
+    }
+}
+
+.bottomInfo {
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+
+    & svg {
+        stroke: $color-gray--light;
     }
 }
 

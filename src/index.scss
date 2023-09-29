@@ -2,7 +2,6 @@
  
   $color-bg: rgb(242, 242, 242); 
   
-  
   $color-queue: rgb(0, 195, 255);         
   $color-development: rgb(255, 166, 0);
   $color-done: rgb(59, 169, 0);
@@ -18,6 +17,7 @@
   $color-priority-low--light: rgba(149, 255, 0, 0.2);
 
   $color-gray: rgb(32, 32, 35);
+  $color-gray--medium: rgb(139, 139, 139);
   $color-gray--light: rgb(190, 190, 190);
 
 * {
@@ -67,6 +67,10 @@ input, textarea {
    &::placeholder {
     color: $color-gray--light;
    }
+
+   &:disabled{
+     color: inherit;
+   }
 }
 
 input[type='date'] {
@@ -77,5 +81,11 @@ input[type='date'] {
   display: flex;
   align-items: center;
   gap: 1rem;
+}
+
+@mixin media($maxWidth) {
+  @media (max-width: $maxWidth) {
+    @content;
+  }
 }
 

@@ -15,8 +15,9 @@ import { TagSize, TagTheme } from '../../../elements/Tag/ui/Tag';
 import { CommentsList } from '../../CommentsList';
 import { EditTask } from '../../EditTask';
 import { SubtasksList } from '../../SubtasksList';
-import './TaskInfo.scss';
 import { selectTaskIndex } from '../../../../store/tasks/selector';
+import { ClockIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline'  
+import './TaskInfo.scss';
     
 interface TaskInfoProps {
     task: ITask
@@ -43,15 +44,20 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
         <>
             <div className='taskInfo'>
                 {!editTask && <>
-                    <div className="heading">
+                    <div className="taskInfo-heading">
                         <div>
                             <p className='additionalInfo'> {projectTitle}</p>
                             <h2><span className='taskIndex'>#{taskIndex + 1}</span> {task.title}</h2>
-                            {task.ends && <p className='additionalInfo'>🕑 {formatDate(task.ends)}</p>}
+                            {task.ends && <p className='additionalInfo'><ClockIcon width={15}/> {formatDate(task.ends)}</p>}
                         </div>
-                        <Button theme={ButtonTheme.CLEAR} onClick={() => setEditTask(true)}>
-                            ✏️
-                        </Button>
+                        <div className="taskInfo-buttons">
+                            <Button onClick={onDelete}>
+                                <TrashIcon width={20}/> 
+                            </Button>
+                            <Button onClick={() => setEditTask(true)}>
+                                <PencilIcon width={20}/> 
+                            </Button>
+                        </div>
                     </div>
                     <div className='info'>Status: <Tag text={task.status} theme={TagTheme.STATUS} size={TagSize.L}/></div>
                     <div className='info'>Priority: <Tag text={task.priority} theme={TagTheme.PRIORITY} size={TagSize.L}/></div>

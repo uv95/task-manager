@@ -1,9 +1,8 @@
 .subtasksList{
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-
-    & .button {
-        width: fit-content;
-    }
+    margin-bottom: 2rem;
+}
+ 
+.addSubtaskButton {
+    width: fit-content;
+    margin-top: 1rem;
 }

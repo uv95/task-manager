@@ -6,18 +6,23 @@
     margin-left: auto;
     background-color: $color-bg;
     margin-bottom: 1rem;
+
+    &-author {
+        font-weight: 600;
+    
+        & span {
+            font-weight: 300;
+            font-size: 1.5rem;
+            color: gray;
+        }
+    }
+
+    &-text {
+        font-size: 1.7rem;
+    }
    }
 
    
-   .author {
-       font-weight: 600;
-   
-       & span {
-           font-weight: 300;
-           font-size: 1.5rem;
-           color: gray;
-       }
-   }
    
    .deleteCommentButton {
        margin-left: auto;

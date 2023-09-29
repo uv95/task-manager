@@ -10,6 +10,7 @@ import { Modal } from '../../../elements/Modal';
 import { Tag } from '../../../elements/Tag';
 import { TagSize, TagTheme } from '../../../elements/Tag/ui/Tag';
 import { TaskInfo } from '../../TaskInfo';
+import { ListBulletIcon, ChatBubbleOvalLeftIcon } from '@heroicons/react/24/outline'       
 import './Task.scss';
 
 interface TaskProps extends HtmlHTMLAttributes<HTMLDivElement> {
@@ -39,8 +40,8 @@ export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, 
                 <p className='description'>{task.description}</p>
 
                 <div className="bottom">
-                    <div>📄 {task.subtasks.filter(t => t.isDone).length}/{task.subtasks.length}</div>
-                    <div>🗣 {commentsLength}</div>
+                    <div className='bottomInfo'><ListBulletIcon width={15}/> {task.subtasks.filter(t => t.isDone).length}/{task.subtasks.length}</div>
+                    <div className='bottomInfo'><ChatBubbleOvalLeftIcon width={15}/> {commentsLength}</div>
                     <Tag text={task.priority} theme={TagTheme.PRIORITY} size={TagSize.S}/>
                 </div>
             </Card>

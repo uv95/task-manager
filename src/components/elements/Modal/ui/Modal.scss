@@ -18,7 +18,8 @@
     top: 10%;
     left: 50%;
     transform: translateX(-50%);
-    min-width: 60rem;
+    width: 60rem;
+    max-width: 90%;
     min-height: 6rem;
     z-index: 2;
 }
