@@ -12,25 +12,46 @@
     font-family: 'Titillium Web', sans-serif;
     font-weight: 400;
 
-    &:hover{
-      transform: scale(1.02);
-      opacity: 0.8;
+    &:disabled {
+     cursor: text;
+     opacity: 0.8;
+
+      &:hover {
+      transform: scale(1);
+      }
     }
-  
-    &:active{
-      color: inherit;
+
+    &-primary {
+      &:hover{
+        transform: scale(1.02);
+        opacity: 0.8;
+      }
+    
+      &:active{
+        transform: scale(0.98);
+      }
     }
 
     &-primary {
         font-weight: 600;
         color: white;
         background-color: $color-gray;
+        
       }
+
     &-outline {
         border: 1px solid $color-gray--light;
+        &:hover{
+          transform: scale(1.02);
+        }
       }
+
     &-clear {
         padding: 0;
+        display: block;
         height: fit-content;
+        &:hover{
+          opacity: 0.7;
+        }
       }
 }

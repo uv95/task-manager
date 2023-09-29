@@ -1,0 +1,16 @@
+.searchTask {
+    display: flex;
+    align-items: center;
+    font-size: 1.5rem;
+    & input {
+        width: 20rem;
+        border: none;
+        background-color: inherit;
+
+        &::placeholder {
+            color: inherit;
+            opacity: 0.5;
+        }
+
+    }
+}

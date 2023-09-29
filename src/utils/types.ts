@@ -30,6 +30,7 @@ export interface IComment {
     text: string,
     createdAt: string,
     replyTo: string,
+    taskId:string
 }
 
 export enum Status {

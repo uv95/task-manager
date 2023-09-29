@@ -1,8 +1,11 @@
 import { HtmlHTMLAttributes } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { deleteComment } from '../../../../store/comments/actions';
+import { selectAllComments } from '../../../../store/comments/selector';
 import { deleteCommentId } from '../../../../store/tasks/actions';
-import { IComment } from '../../../../utils/types';
+import { selectCurrentTask } from '../../../../store/tasks/selector';
+import { IComment, ITask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import './Comment.scss';
@@ -16,10 +19,14 @@ interface CommentProps extends HtmlHTMLAttributes<HTMLDivElement> {
     
 export const Comment = ({ width, comment, taskId, onReplyToComment}: CommentProps) => {
     const dispatch = useDispatch();
+    const comments = useSelector(selectAllComments)
+    const task = useSelector(selectCurrentTask(taskId)) as ITask
 
     const onDeleteComment = (id:string) => {
         dispatch(deleteComment(id))
         dispatch(deleteCommentId({taskId, commentId: id}))
+        
+        task.comments.forEach(commentId => !Object.keys(comments).includes(commentId) && dispatch(deleteCommentId({taskId, commentId})))
     }
     return (
         <div className='comment' style={{width}}>

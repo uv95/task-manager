@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
 import { Button } from '../../../components/elements/Button';
 import { ButtonTheme } from '../../../components/elements/Button/ui/Button';
 import { AddProject } from '../../../components/modules/AddProject';
-import { Header } from '../../../components/modules/Header';
-import { Modal } from '../../../components/modules/Modal';
+import { Header } from '../../../components/elements/Header';
+import { Modal } from '../../../components/elements/Modal';
 import { Project } from '../../../components/modules/Project';
 import { selectProjects, selectProjectsLength } from '../../../store/projects/selector';
 import { IProject } from '../../../utils/types';

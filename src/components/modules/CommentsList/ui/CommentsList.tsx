@@ -1,7 +1,9 @@
 import { ChangeEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { addComment } from '../../../../store/comments/actions';
+import { selectAllComments } from '../../../../store/comments/selector';
 import { addCommentId } from '../../../../store/tasks/actions';
 import { countCommentLevel } from '../../../../utils/countCommentLevel';
 import { sortComments } from '../../../../utils/sortComments';
@@ -12,13 +14,14 @@ import { Comment } from '../../Comment/ui/Comment';
 import './CommentsList.scss';
     
 interface CommentsListProps {
-    comments: Record<string, IComment>
+    comments: string[]
     taskId:string
 }
     
 export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
     const dispatch = useDispatch();
-    const sortedComments = sortComments(Object.keys(comments), comments)
+    const commentsEntities = useSelector(selectAllComments)
+    const sortedComments = sortComments(comments, commentsEntities)
 
     const [replyToComment, setReplyToComment] = useState('')
     const [newComment, setNewComment] = useState<IComment>({
@@ -26,14 +29,16 @@ export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
         author: 'John Smith',
         text: '',
         createdAt: '',
-        replyTo: ''
+        replyTo: '',
+        taskId
     })
     const [newReply, setNewReply] = useState<IComment>({
         id: '',
         author: 'John Smith',
         text: '',
         createdAt: '',
-        replyTo: ''
+        replyTo: '',
+        taskId
     })
 
     const onChange =(e:ChangeEvent<HTMLInputElement>) => {
@@ -55,7 +60,7 @@ export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
         setReplyToComment('')
     }
 
-    const getCommentWidth = (comment:IComment) => !comment.replyTo ? '100%' : (100 - (10 * countCommentLevel({commentId: comment.id, comments: comments})) + '%')
+    const getCommentWidth = (comment:IComment) => !comment.replyTo ? '100%' : (100 - (10 * countCommentLevel({commentId: comment.id, comments: commentsEntities})) + '%')
 
     const onAddComment = (replyTo: string) => {
         const newCommentId = uuidv4()
@@ -63,7 +68,7 @@ export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
         dispatch(addCommentId({taskId, commentId: newCommentId}))
         resetInputs()
     }
-
+    
     return (
         <div className='commentsList'>
             <h3>Comments ({sortedComments.length})</h3>
@@ -71,7 +76,8 @@ export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
                 <div key={comment.id}>
                     <Comment comment={comment} taskId={taskId} width={getCommentWidth(comment)} onReplyToComment={() => setReplyToComment(comment.id)} />
 
-                    { replyToComment === comment.id && <div className="input" style={{width: getCommentWidth(comment)}} >
+                    { replyToComment === comment.id &&
+                    <div className="input" style={{width: getCommentWidth(comment)}} >
                         <input type="text" placeholder='Type your comment...' value={newReply.text} onChange={onChangeReply}/>
 
                         <Button theme={ButtonTheme.PRIMARY} disabled={newReply.text===''} onClick={() => onAddComment(replyToComment)}>Send</Button>

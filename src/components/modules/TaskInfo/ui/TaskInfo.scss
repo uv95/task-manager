@@ -1,5 +1,7 @@
+@import '../../../../index.scss';
+
 .taskInfo {
-    width: 70rem;
+    width: 80rem;
     min-width: 90%;
 }
 
@@ -19,4 +21,9 @@
     align-items: center;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+.taskIndex {
+    font-weight: 300;
+    font-size: 2.8rem;
 }

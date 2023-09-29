@@ -3,8 +3,9 @@
     gap: 4rem;
 }
 
-.addTaskButton {
-    display: block;
-    margin-left: auto;
+.tasksHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     margin-bottom: 2rem;
 }
