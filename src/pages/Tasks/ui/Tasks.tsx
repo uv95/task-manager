@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DragDropContext, Draggable, Droppable, DropResult } from 'react-beautiful-dnd';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useParams } from 'react-router-dom';
@@ -16,6 +16,7 @@ import { selectAllTasks, selectVisibleTasks } from '../../../store/tasks/selecto
 import { ITask, Status } from '../../../utils/types';
 import { PlusIcon } from '@heroicons/react/24/solid'       
 import './Tasks.scss';
+import { ColumnsMobile } from '../../../components/modules/ColumnsMobile';
     
 export const Tasks = () => {
     const params = useParams();
@@ -26,7 +27,7 @@ export const Tasks = () => {
     
     const [openModal, setOpenModal] = useState(false)
     const [searchInput, setSearchInput] = useState('')
-    
+    const [width, setWidth] = useState(0)
     const visibleTasks = useSelector(selectVisibleTasks(searchInput))
 
     const columns = Object.values(Status)
@@ -43,6 +44,16 @@ export const Tasks = () => {
         }}))
     }
 
+    useEffect(() => {
+        function handleResize() {
+            setWidth(window.innerWidth)
+        }
+        window.addEventListener("resize", handleResize)        
+        return () => { 
+            window.removeEventListener("resize", handleResize)
+        }
+    })
+
     if (!project) return <p>No project found!</p>
     
     return (
@@ -56,7 +67,7 @@ export const Tasks = () => {
                     </Button>
                 </div>
 
-                <div className='columns'>
+                {width < 630 ? <ColumnsMobile tasks={visibleTasks} projectId={id}/> : <div className='columns'>
                     <DragDropContext onDragEnd={onDragEnd}>
                         {columns.map(column => (
                             <Droppable key={column} droppableId={column}>
@@ -66,12 +77,12 @@ export const Tasks = () => {
 
                                         {visibleTasks.map((task: ITask, index: number) => (
                                             task.status === column && 
-                                            <Draggable key={task.id} draggableId={task.id} index={index}>
-                                                {(provided, snapshot) => (
-                                                    <Task task={task} projectId={id} ref={provided.innerRef} provided={provided}/> 
-                                                )}
+                                                <Draggable key={task.id} draggableId={task.id} index={index}>
+                                                    {(provided, snapshot) => (
+                                                        <Task task={task} projectId={id} ref={provided.innerRef} provided={provided}/> 
+                                                    )}
                                                
-                                            </Draggable>
+                                                </Draggable>
                                         ))}
                                         {provided.placeholder}
                                     </Column>
@@ -79,7 +90,7 @@ export const Tasks = () => {
                             </Droppable>
                         ))}
                     </DragDropContext>
-                </div>
+                </div>}
             </main>
 
             {openModal && <Modal onClose={() => setOpenModal(false)}>

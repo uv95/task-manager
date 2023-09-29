@@ -60,12 +60,19 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
                         </div>
                     </div>
                     <div className='info'>Status: <Tag text={task.status} theme={TagTheme.STATUS} size={TagSize.L}/></div>
+
                     <div className='info'>Priority: <Tag text={task.priority} theme={TagTheme.PRIORITY} size={TagSize.L}/></div>
-                    <div className='info'>Starts: {formatDate(task.starts)}</div>
-                    {task.ends && <div className='info'>Ends: {formatDate(task.ends)}</div>}
-                    <div className='info'>In progress: {taskInProgressFor}</div>
+
+                    <div className='info'>Starts: <span>{formatDate(task.starts)}</span></div>
+
+                    {task.ends && <div className='info'>Ends: <span>{formatDate(task.ends)}</span></div>}
+
+                    <div className='info'>In progress: <span>{taskInProgressFor}</span></div>
+
                     <div className='info'>{task.description}</div>
-                    <div className="info">Subtasks: {task.subtasks.length}</div>
+
+                    <div className="info">Subtasks: <span>{task.subtasks.length}</span></div>
+
                     <SubtasksList initialSubtasks={task.subtasks} cantEdit taskId={task.id}/>
                     <CommentsList comments={comments} taskId={task.id}/>
                 </>}

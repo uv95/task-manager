@@ -14,15 +14,20 @@
             font-weight: 300;
             font-size: 1.5rem;
             color: gray;
+            @include media(500px) {
+                font-size: 1.2rem;   
+               }
         }
+
+        @include media(500px) {
+           font-size: 1.5rem;   
+          }
     }
 
     &-text {
         font-size: 1.7rem;
     }
    }
-
-   
    
    .deleteCommentButton {
        margin-left: auto;

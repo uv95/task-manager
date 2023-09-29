@@ -32,11 +32,11 @@ export const Subtask = ({ subtask, taskId, cantEdit }: SubtaskProps) => {
 
     return (
         <div className="subtask">
-            <div className="input">
+            <div className={`input ${cantEdit ? 'input-disabled' : ''}`}>
                 {!cantEdit && <Button onClick={onDelete}>✕</Button>}
                 <div className={`checkIcon ${subtask.isDone ? 'checkIcon-checked' : ''}`} onClick={onToggleIsDone}>{subtask.isDone && <CheckIcon width={17}/> }</div>
-
-                <input autoFocus={!subtask.text} className={`${cantEdit ? 'isDisabled' : ''}`} disabled={cantEdit} type="text" onChange={onChange} value={subtask.text}/>
+                {cantEdit && <p>{subtask.text}</p>}
+                {!cantEdit && <input type='text' autoFocus={!subtask.text} className={`${cantEdit ? 'isDisabled' : ''}`} disabled={cantEdit} onChange={onChange} value={subtask.text}/>}
                 
             </div>
         </div>

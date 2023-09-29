@@ -2,6 +2,7 @@
 
 .task {
     width: 100%;
+    min-width: 17rem;
     padding-left: 1.5rem;
     background-color: #fff;
     display: flex;
@@ -12,6 +13,7 @@
     cursor: pointer !important;
 
     & h2 {
+        line-height: 2.8rem;
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;  

@@ -16,7 +16,7 @@ import './Task.scss';
 interface TaskProps extends HtmlHTMLAttributes<HTMLDivElement> {
     task: ITask
     projectId: string
-    provided: DraggableProvided
+    provided?: DraggableProvided
 }
     
 export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, projectId, provided}, ref) {
@@ -35,7 +35,7 @@ export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, 
 
     return (
         <>
-            <Card ref={ref} {...provided.draggableProps} {...provided.dragHandleProps} className={`task task-${task.status}`} onClick={() => setOpenModal(true)}>
+            <Card ref={ref} {...provided?.draggableProps} {...provided?.dragHandleProps} className={`task task-${task.status}`} onClick={() => setOpenModal(true)}>
                 <h2><span className='taskNumber'>#{taskNumber}</span> {task.title}</h2>
                 <p className='description'>{task.description}</p>
 

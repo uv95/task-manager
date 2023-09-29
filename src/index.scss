@@ -20,6 +20,12 @@
   $color-gray--medium: rgb(139, 139, 139);
   $color-gray--light: rgb(190, 190, 190);
 
+  @mixin media($maxWidth) {
+    @media (max-width: $maxWidth) {
+      @content;
+    }
+  }
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -41,6 +47,10 @@ main {
   padding: 0 2rem 2rem 2rem;
   margin: 0 auto;
   max-width: 140rem;
+
+  @include media(630px){
+  padding: 0 1rem 2rem 1rem;
+  }
 }
 
 a {
@@ -55,7 +65,6 @@ a {
 
 input, textarea {
   font-size: inherit;
-  height: 4rem;
   padding: 0 1rem;
   border: 1px solid  $color-gray--light;
   border-radius: 1rem;
@@ -72,6 +81,9 @@ input, textarea {
      color: inherit;
    }
 }
+ input {
+  height: 4rem;
+}
 
 input[type='date'] {
   font-size: 1.5rem;
@@ -83,9 +95,4 @@ input[type='date'] {
   gap: 1rem;
 }
 
-@mixin media($maxWidth) {
-  @media (max-width: $maxWidth) {
-    @content;
-  }
-}
 

@@ -77,12 +77,14 @@ export const CommentsList = ({ comments, taskId }: CommentsListProps) => {
                     <Comment comment={comment} taskId={taskId} width={getCommentWidth(comment)} onReplyToComment={() => setReplyToComment(comment.id)} />
 
                     { replyToComment === comment.id &&
-                    <div className="input" style={{width: getCommentWidth(comment)}} >
+                    <div className="input input-reply" style={{width: getCommentWidth(comment)}} >
                         <input type="text" placeholder='Type your comment...' value={newReply.text} onChange={onChangeReply}/>
+                        <div className='replyButtons'>
 
-                        <Button theme={ButtonTheme.PRIMARY} disabled={newReply.text===''} onClick={() => onAddComment(replyToComment)}>Send</Button>
+                            <Button theme={ButtonTheme.PRIMARY} disabled={newReply.text===''} onClick={() => onAddComment(replyToComment)}>Send</Button>
 
-                        <Button theme={ButtonTheme.OUTLINE} onClick={resetInputs}>Cancel</Button>
+                            <Button theme={ButtonTheme.OUTLINE} onClick={resetInputs}>Cancel</Button>
+                        </div>
                     </div>}
                 </div>
             ))}
