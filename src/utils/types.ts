@@ -6,6 +6,7 @@ export interface IProject {
 
 export interface ITask {
     id: string,
+    number: number,
     title: string,
     description: string,
     starts: string,

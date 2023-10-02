@@ -27,7 +27,7 @@ export const Tasks = () => {
     
     const [openModal, setOpenModal] = useState(false)
     const [searchInput, setSearchInput] = useState('')
-    const [width, setWidth] = useState(0)
+    const [width, setWidth] = useState(1000)
     const visibleTasks = useSelector(selectVisibleTasks(searchInput))
 
     const columns = Object.values(Status)

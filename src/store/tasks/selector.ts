@@ -10,9 +10,7 @@ export const selectProjectTasks = (projectId:string) => (state:RootState) => {
 
 export const selectCurrentTask = (taskId:string) => (state:RootState) => state.tasks.entities[taskId as keyof typeof state.tasks.entities]
 
-export const selectTaskIndex = (taskId:string) => (state:RootState) => state.tasks.ids.indexOf(taskId)
-
 export const selectVisibleTasks = (searchInput: string) => (state:RootState) => {
     const { entities } = state.tasks;
-    return Object.values(entities).filter((task, index) => (index + 1).toString() === searchInput.trim() || task.title.toLowerCase().indexOf(searchInput.toLowerCase().trim()) >=0)
+    return Object.values(entities).filter((task) => task.number.toString() === searchInput.trim() || task.title.toLowerCase().indexOf(searchInput.toLowerCase().trim()) >= 0)
 }

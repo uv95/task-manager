@@ -3,7 +3,6 @@ import { DraggableProvided } from 'react-beautiful-dnd';
 import { useSelector } from 'react-redux';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { selectAllComments } from '../../../../store/comments/selector';
-import { selectTaskIndex } from '../../../../store/tasks/selector';
 import { ITask } from '../../../../utils/types';
 import { Card } from '../../../elements/Card';
 import { Modal } from '../../../elements/Modal';
@@ -23,7 +22,6 @@ export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, 
     const [openModal, setOpenModal] = useState(false)
     const { setSubtasks } = useSubtasksContext()
     const comments = useSelector(selectAllComments)
-    const taskNumber = useSelector(selectTaskIndex(task.id)) + 1
   
     const onCloseModal = () => {
         setOpenModal(false)
@@ -36,7 +34,7 @@ export const Task = forwardRef<HTMLDivElement, TaskProps>(function Task({ task, 
     return (
         <>
             <Card ref={ref} {...provided?.draggableProps} {...provided?.dragHandleProps} className={`task task-${task.status}`} onClick={() => setOpenModal(true)}>
-                <h2><span className='taskNumber'>#{taskNumber}</span> {task.title}</h2>
+                <h2><span className='taskNumber'>#{task.number}</span> {task.title}</h2>
                 <p className='description'>{task.description}</p>
 
                 <div className="bottom">

@@ -1,10 +1,12 @@
 import { format } from 'date-fns';
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import { useSubtasksContext } from '../../../../context/SubtasksContext';
 import { addTaskId } from '../../../../store/projects/actions';
 import { addTask, updateTask } from '../../../../store/tasks/actions';
+import { selectProjectTasks } from '../../../../store/tasks/selector';
 import { ITask, PriorityTypes, Status } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
 import { ButtonTheme } from '../../../elements/Button/ui/Button';
@@ -20,10 +22,12 @@ interface EditTaskProps {
     
 export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
     const dispatch = useDispatch();
+    const allTasks = useSelector(selectProjectTasks(projectId))
 
     const {subtasks, setSubtasks} = useSubtasksContext();
     const [formData, setFormData] = useState<ITask>({
         id: task?.id || '',
+        number: 1,
         title: task?.title || '',
         description: task?.description || '',
         starts: task?.starts || format(new Date(), 'yyyy-MM-dd'),
@@ -41,7 +45,7 @@ export const EditTask = ({onClose, projectId, task }: EditTaskProps) => {
             dispatch(updateTask({taskId: task.id, updatedFields:{...formData, subtasks}}))
         } else {
             const newId = uuidv4()
-            dispatch(addTask({...formData, id: newId, subtasks}))
+            dispatch(addTask({...formData, id: newId, number: allTasks.length + 1, subtasks}))
             dispatch(addTaskId({taskId: newId, projectId}))
         }
         onClose()

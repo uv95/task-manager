@@ -9,13 +9,11 @@ import { formatDate } from '../../../../utils/formatDate';
 import { getTimeInProgress } from '../../../../utils/getTimeInProgress';
 import { IProject, ITask } from '../../../../utils/types';
 import { Button } from '../../../elements/Button';
-import { ButtonTheme } from '../../../elements/Button/ui/Button';
 import { Tag } from '../../../elements/Tag';
 import { TagSize, TagTheme } from '../../../elements/Tag/ui/Tag';
 import { CommentsList } from '../../CommentsList';
 import { EditTask } from '../../EditTask';
 import { SubtasksList } from '../../SubtasksList';
-import { selectTaskIndex } from '../../../../store/tasks/selector';
 import { ClockIcon, PencilIcon, TrashIcon } from '@heroicons/react/24/outline'  
 import './TaskInfo.scss';
     
@@ -27,7 +25,6 @@ interface TaskInfoProps {
 export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
     const dispatch = useDispatch();
     const comments = useSelector(selectAllTaskComments(task.id));
-    const taskIndex = useSelector(selectTaskIndex(task.id))
     const projects = useSelector(selectProjects) as Record<string, IProject>
     const projectTitle = projects[projectId].title;
     const taskInProgressFor = getTimeInProgress(task.starts);
@@ -47,7 +44,7 @@ export const TaskInfo = ({task, projectId }: TaskInfoProps) => {
                     <div className="taskInfo-heading">
                         <div>
                             <p className='additionalInfo'> {projectTitle}</p>
-                            <h2><span className='taskIndex'>#{taskIndex + 1}</span> {task.title}</h2>
+                            <h2><span className='taskIndex'>#{task.number}</span> {task.title}</h2>
                             {task.ends && <p className='additionalInfo'><ClockIcon width={15}/> {formatDate(task.ends)}</p>}
                         </div>
                         <div className="taskInfo-buttons">
