@@ -1,13 +1,19 @@
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../../../components/elements/Button';
+import { ButtonTheme } from '../../../components/elements/Button/ui/Button';
 import './NotFound.scss';
     
-interface NotFoundProps {
-}
-    
-export const NotFound = ({ }: NotFoundProps) => {
+ 
+export const NotFound = () => {
+    const navigate = useNavigate()
     return (
-        <div className='NotFound'>
-    
-            /
+        <div className='notFound'>
+            <div className='notFound-content'>
+                <h1>Page not found!</h1>
+                <Button theme={ButtonTheme.PRIMARY} onClick={() => navigate(-1)}>
+                    Back
+                </Button>
+            </div>
         </div>
     );
 };
